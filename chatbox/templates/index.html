@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="chatbox-container">
+
+        <div id="chatbox">
+            {% for message in conversation_history %}
+                <div class="message {% if 'Bot' in message %}bot-message{% else %}user-message{% endif %}">
+                    {{ message.split(":")[1] }}
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+        <form method="POST" id="chat-form">
+            <input type="text" id="chat-input" name="user_input" placeholder="Type a message..." value="{{ user_input }}" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
